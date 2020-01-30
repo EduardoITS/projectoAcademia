@@ -11,26 +11,38 @@
         <!--iOS Books-->
         <scene sceneID="U4U-0y-eN4">
             <objects>
-                <collectionViewController id="4Cc-Vz-dL6" sceneMemberID="viewController">
+                <collectionViewController id="4Cc-Vz-dL6" customClass="ListViewController" customModule="BookStore_Eduardo" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="wrW-Bu-oHW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HtF-e9-ifA">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="200" height="200"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9Iy-8O-Zii">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BookCell" id="9Iy-8O-Zii" customClass="BookPhotoCell" customModule="BookStore_Eduardo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ngf-jh-cU8">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oay-63-RfL">
+                                            <rect key="frame" x="20" y="20" width="160" height="180"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Oay-63-RfL" firstAttribute="leading" secondItem="ngf-jh-cU8" secondAttribute="leading" constant="20" symbolic="YES" id="5Go-75-QQm"/>
+                                        <constraint firstAttribute="trailing" secondItem="Oay-63-RfL" secondAttribute="trailing" constant="20" symbolic="YES" id="9YW-UA-rY2"/>
+                                        <constraint firstItem="Oay-63-RfL" firstAttribute="top" secondItem="ngf-jh-cU8" secondAttribute="top" constant="20" symbolic="YES" id="LD0-Wo-lJq"/>
+                                        <constraint firstAttribute="bottom" secondItem="Oay-63-RfL" secondAttribute="bottom" id="ocb-0d-b93"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
+                                    <outlet property="imageView" destination="Oay-63-RfL" id="yiX-k8-s2t"/>
                                     <segue destination="dcQ-gx-XFc" kind="show" id="gFr-EW-VCm"/>
                                 </connections>
                             </collectionViewCell>
