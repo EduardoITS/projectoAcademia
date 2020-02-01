@@ -43,7 +43,7 @@
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="imageView" destination="Oay-63-RfL" id="yiX-k8-s2t"/>
-                                    <segue destination="dcQ-gx-XFc" kind="show" id="gFr-EW-VCm"/>
+                                    <segue destination="dcQ-gx-XFc" kind="show" identifier="DetailsSegue" id="gFr-EW-VCm"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -63,18 +63,108 @@
         <!--Details-->
         <scene sceneID="LbN-Ln-vXF">
             <objects>
-                <viewController id="dcQ-gx-XFc" sceneMemberID="viewController">
+                <viewController id="dcQ-gx-XFc" customClass="DetailsViewController" customModule="BookStore_Eduardo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ocZ-7H-s6u">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klc-1q-tSF">
+                                <rect key="frame" x="20" y="148" width="44" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="78M-bI-W0p">
+                                <rect key="frame" x="20" y="212" width="65" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAW-bY-wUV">
+                                <rect key="frame" x="20" y="276" width="364" height="91.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aQ-A1-Eab">
+                                <rect key="frame" x="74" y="148" width="87" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Book Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XvB-Dv-slG">
+                                <rect key="frame" x="95" y="212" width="108" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Book description very londfasdf asdjfa sdfg adfsg asdfg adsfg afg ag zsdfasdf asdfgasdf asdfasd" lineBreakMode="tailTruncation" numberOfLines="15" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ca-0i-4RW">
+                                <rect key="frame" x="136" y="276" width="258" height="95.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Favorite:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJn-1k-kcQ">
+                                <rect key="frame" x="20" y="411.5" width="74.5" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="twk-fU-l2b">
+                                <rect key="frame" x="109.5" y="408" width="51" height="31"/>
+                                <connections>
+                                    <action selector="favoriteSwitchTouch:" destination="dcQ-gx-XFc" eventType="valueChanged" id="cRc-og-DPE"/>
+                                </connections>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vF-sY-Nz0">
+                                <rect key="frame" x="190" y="480.5" width="34" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Buy"/>
+                                <connections>
+                                    <action selector="buyButtonTouch:" destination="dcQ-gx-XFc" eventType="touchUpInside" id="Y42-1G-q1f"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wAW-bY-wUV" firstAttribute="leading" secondItem="sYh-A9-FoQ" secondAttribute="leading" constant="20" id="2so-ek-Aso"/>
+                            <constraint firstItem="twk-fU-l2b" firstAttribute="centerY" secondItem="aJn-1k-kcQ" secondAttribute="centerY" id="6Z7-hh-lv2"/>
+                            <constraint firstItem="6vF-sY-Nz0" firstAttribute="centerX" secondItem="ocZ-7H-s6u" secondAttribute="centerX" id="7sZ-Iq-cEx"/>
+                            <constraint firstItem="sYh-A9-FoQ" firstAttribute="trailing" secondItem="9ca-0i-4RW" secondAttribute="leading" constant="278" id="9W1-cn-7ZG"/>
+                            <constraint firstItem="7aQ-A1-Eab" firstAttribute="top" secondItem="sYh-A9-FoQ" secondAttribute="top" constant="60" id="BlB-0H-KO7"/>
+                            <constraint firstItem="wAW-bY-wUV" firstAttribute="top" secondItem="78M-bI-W0p" secondAttribute="bottom" constant="40" id="DWQ-yO-Bvz"/>
+                            <constraint firstItem="XvB-Dv-slG" firstAttribute="bottom" secondItem="78M-bI-W0p" secondAttribute="bottom" id="Dmc-tC-qcc"/>
+                            <constraint firstItem="7aQ-A1-Eab" firstAttribute="leading" secondItem="Klc-1q-tSF" secondAttribute="trailing" constant="10" id="Lax-ay-5ZP"/>
+                            <constraint firstItem="twk-fU-l2b" firstAttribute="leading" secondItem="aJn-1k-kcQ" secondAttribute="trailing" constant="15" id="M5R-qG-VyZ"/>
+                            <constraint firstItem="Klc-1q-tSF" firstAttribute="leading" secondItem="sYh-A9-FoQ" secondAttribute="leading" constant="20" id="Oa9-1y-ePL"/>
+                            <constraint firstItem="78M-bI-W0p" firstAttribute="leading" secondItem="sYh-A9-FoQ" secondAttribute="leading" constant="20" id="Qyw-WM-unU"/>
+                            <constraint firstItem="twk-fU-l2b" firstAttribute="top" secondItem="wAW-bY-wUV" secondAttribute="bottom" constant="40.5" id="QzP-8d-eEe"/>
+                            <constraint firstItem="9ca-0i-4RW" firstAttribute="top" secondItem="XvB-Dv-slG" secondAttribute="bottom" constant="40" id="T41-Jh-9eI"/>
+                            <constraint firstItem="6vF-sY-Nz0" firstAttribute="top" secondItem="aJn-1k-kcQ" secondAttribute="bottom" constant="45" id="T5T-9a-xpP"/>
+                            <constraint firstItem="sYh-A9-FoQ" firstAttribute="trailing" secondItem="9ca-0i-4RW" secondAttribute="trailing" constant="20" id="WUo-s3-ihd"/>
+                            <constraint firstItem="aJn-1k-kcQ" firstAttribute="leading" secondItem="sYh-A9-FoQ" secondAttribute="leading" constant="20" id="Zw3-4w-UTc"/>
+                            <constraint firstItem="Klc-1q-tSF" firstAttribute="top" secondItem="sYh-A9-FoQ" secondAttribute="top" constant="60" id="gjD-na-Jh3"/>
+                            <constraint firstItem="sYh-A9-FoQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XvB-Dv-slG" secondAttribute="trailing" symbolic="YES" id="hfl-lU-oIO"/>
+                            <constraint firstItem="aJn-1k-kcQ" firstAttribute="top" secondItem="9ca-0i-4RW" secondAttribute="bottom" constant="40" id="hhn-Ht-UyR"/>
+                            <constraint firstItem="sYh-A9-FoQ" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7aQ-A1-Eab" secondAttribute="trailing" symbolic="YES" id="rx0-zr-Rsf"/>
+                            <constraint firstItem="9ca-0i-4RW" firstAttribute="leading" secondItem="wAW-bY-wUV" secondAttribute="trailing" constant="-248" id="tMk-D1-dc7"/>
+                            <constraint firstItem="78M-bI-W0p" firstAttribute="top" secondItem="Klc-1q-tSF" secondAttribute="bottom" constant="40" id="uQV-Fg-7Sj"/>
+                            <constraint firstItem="XvB-Dv-slG" firstAttribute="leading" secondItem="78M-bI-W0p" secondAttribute="trailing" constant="10" id="uSE-ov-OHn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="sYh-A9-FoQ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="ija-o6-XKq"/>
+                    <connections>
+                        <outlet property="bookAuthorLabel" destination="XvB-Dv-slG" id="JQQ-XP-6b6"/>
+                        <outlet property="bookDescriptionLabel" destination="9ca-0i-4RW" id="5XM-WP-0Pg"/>
+                        <outlet property="bookTitleLabel" destination="7aQ-A1-Eab" id="pou-V4-eMZ"/>
+                        <outlet property="buyButton" destination="6vF-sY-Nz0" id="tHB-tB-JDp"/>
+                        <outlet property="favoriteSwitch" destination="twk-fU-l2b" id="zOg-jx-ZX9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lAN-WQ-5Fh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1891" y="138"/>
+            <point key="canvasLocation" x="1889.8550724637682" y="137.94642857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="D1j-AW-B0j">

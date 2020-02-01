@@ -20,27 +20,9 @@ class ListViewController: UICollectionViewController {
     private let reuseIdentifier = "BookCell"
     private let itemsPerRow: CGFloat = 2
     
-    var bookList: [book] = []
+    var detailsVC = DetailsViewController()
     
-    struct images: Codable {
-        var smallThumbnail: String
-        var thumbnail: String
-    }
-    
-    struct bookInfo: Codable {
-        var title: String
-        var subtitle: String?
-        var imageLinks: images
-    }
-    
-    struct book: Codable {
-        var id: String
-        var volumeInfo: bookInfo
-    }
-    
-    struct response: Codable {
-        var items: [book]
-    }
+    var bookList: [GoogleApiResponse.book] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,14 +36,22 @@ class ListViewController: UICollectionViewController {
         
         AF.request(url, method: .get)
         .validate()
-        .responseDecodable(of: response.self) { response in
-            
+            .responseDecodable(of: GoogleApiResponse.self) { response in
+                
             if(response.value?.items != nil)
             {
                 self.bookList = response.value!.items
             }
             
             self.collectionView.reloadData()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "DetailsSegue",
+            let destinationVC = segue.destination as? DetailsViewController {
+                detailsVC = destinationVC
         }
     }
 }
@@ -110,6 +100,19 @@ extension ListViewController : UICollectionViewDelegateFlowLayout {
                       minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return sectionInsets.left
   }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        detailsVC.bookTitle = bookList[indexPath.row].volumeInfo.title
+        detailsVC.bookAuthor = bookList[indexPath.row].volumeInfo.authors?.first ?? ""
+        detailsVC.bookDescription = bookList[indexPath.row].volumeInfo.description ?? ""
+        
+        detailsVC.isFavorite = true
+        
+        detailsVC.buyLink = bookList[indexPath.row].saleInfo.buyLink ?? ""
+        
+        self.shouldPerformSegue(withIdentifier: "DetailsSegue", sender: self)
+    }
 }
 
 private extension ListViewController {
