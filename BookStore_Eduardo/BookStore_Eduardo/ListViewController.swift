@@ -12,14 +12,16 @@ import CoreData
 import Alamofire
 import SDWebImage
 
-
 class ListViewController: UICollectionViewController {
+    
+    @IBOutlet var favoritesButton: UIBarButtonItem!
     
     private let sectionInsets = UIEdgeInsets( top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
     
     private let reuseIdentifier = "BookCell"
     private let itemsPerRow: CGFloat = 2
     
+    let helper = FavoriteBooksHelper()
     var detailsVC = DetailsViewController()
     
     var bookList: [GoogleApiResponse.book] = []
@@ -47,6 +49,24 @@ class ListViewController: UICollectionViewController {
         }
     }
     
+    @IBAction func favoritesButtonTouch(_ sender: UIBarButtonItem) {
+        if(favoritesButton.title == "Favorites") {
+            let favoriteBooks = helper.getFavoritesList()
+            var filteredList: [GoogleApiResponse.book] = []
+            for book in bookList {
+                if(favoriteBooks.contains(book.id)){
+                    filteredList.append(book)
+                }
+            }
+            bookList = filteredList
+            self.collectionView.reloadData()
+            favoritesButton.title = "All"
+        } else {
+            self.fetchBooks()
+            favoritesButton.title = "Favorites"
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "DetailsSegue",
@@ -55,6 +75,8 @@ class ListViewController: UICollectionViewController {
         }
     }
 }
+
+
 
 // UICollectionViewDataSource
 extension ListViewController {
@@ -103,13 +125,15 @@ extension ListViewController : UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        detailsVC.bookTitle = bookList[indexPath.row].volumeInfo.title
-        detailsVC.bookAuthor = bookList[indexPath.row].volumeInfo.authors?.first ?? ""
-        detailsVC.bookDescription = bookList[indexPath.row].volumeInfo.description ?? ""
+        let selectedBook = bookList[indexPath.row]
         
-        detailsVC.isFavorite = true
-        
-        detailsVC.buyLink = bookList[indexPath.row].saleInfo.buyLink ?? ""
+        detailsVC.bookId = selectedBook.id
+        detailsVC.bookTitle = selectedBook.volumeInfo.title
+        detailsVC.bookAuthor = selectedBook.volumeInfo.authors?.first ?? ""
+        detailsVC.bookDescription = selectedBook.volumeInfo.description ?? ""
+        detailsVC.buyLink = selectedBook.saleInfo.buyLink ?? ""
+
+        detailsVC.isFavorite = helper.isFavorite(bookId: selectedBook.id)
         
         self.shouldPerformSegue(withIdentifier: "DetailsSegue", sender: self)
     }

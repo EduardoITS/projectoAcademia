@@ -53,8 +53,15 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="iOS Books" id="Qhp-IO-Ryg">
-                        <barButtonItem key="rightBarButtonItem" title="Favorites" style="plain" id="jWs-3y-Y1K"/>
+                        <barButtonItem key="rightBarButtonItem" title="Favorites" style="done" id="jWs-3y-Y1K">
+                            <connections>
+                                <action selector="favoritesButtonTouch:" destination="4Cc-Vz-dL6" id="0rz-tY-P96"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="favoritesButton" destination="jWs-3y-Y1K" id="yzY-0d-8dA"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOz-Ec-vLV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

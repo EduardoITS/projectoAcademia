@@ -16,6 +16,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet var favoriteSwitch: UISwitch!
     @IBOutlet var buyButton: UIButton!
     
+    var bookId = ""
     var bookTitle = ""
     var bookAuthor = ""
     var bookDescription = ""
@@ -44,7 +45,13 @@ class DetailsViewController: UIViewController {
     }
     
     @IBAction func favoriteSwitchTouch(_ sender: UISwitch) {
+        let helper = FavoriteBooksHelper()
         
+        if(sender.isOn) {
+            helper.addFavorite(bookId: bookId)
+        } else {
+            helper.removeFavorite(bookId: bookId)
+        }
     }
     
 }
