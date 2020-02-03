@@ -31,6 +31,22 @@ class ListViewController: UICollectionViewController {
         
         self.fetchBooks()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if(favoritesButton.title == "All") {
+            let favoriteBooks = helper.getFavoritesList()
+            var filteredList: [GoogleApiResponse.book] = []
+            for book in bookList {
+                if(favoriteBooks.contains(book.id)){
+                    filteredList.append(book)
+                }
+            }
+            bookList = filteredList
+            self.collectionView.reloadData()
+        }
+    }
 
     // fetch data with Alamofire
     func fetchBooks(){
